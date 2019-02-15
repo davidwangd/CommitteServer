@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.idea*
+db.*
+
+
+# Unittest / Coverage report
+.coverage
+.pytest_cache/
+coverage-reports/
+xunit-reports/
+
+**/.DS_Store
+
+# VS stuff
+.vs
+.vscode
+
+# Logfiles
+*.log
+
+# Database
+db.sqlite3
+
+# 忽略我的本地调试工具代码
+build.sh
+
+#忽略 protobuf的.sc文件
+*.sc
+
+# Files referenced by Django FileField
+*.dat
