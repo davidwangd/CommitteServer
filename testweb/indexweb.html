@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link href="fomation.css" rel="stylesheet" type="text/css" />
+    <title>同济大学经济与管理学院学生会办事网站</title>
+
+    <!--<script type="text/javascript" src="/js/dddd.js"></script>-->
+</head>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use('layer',function(){
+        var layer=layui.layer;
+    });
+    function ShowLoginBox()
+    {
+        document.getElementById("try").innerHTML='hello';
+        layer.msg("hello");
+    }
+</script>
+<body>
+<div id="header">
+    <div id="header_con">
+        <a href="javascript:;" onclick="ShowRegBox()">注册</a>
+        <a href="javascript:;" onclick="ShowLoginBox()">登录</a>
+    </div>
+</div>
+<div id="loginBox">
+    <div class="login_Item">
+        <input type="text" id="TxtUserName"  placeholder="手机邮箱/用户名" />
+    </div>
+    <div class="login_Item"><input type="password" id="TxtPwd" placeholder="请输入密码" /></div>
+    <div class="login_Item"><a href="javascript:;" onclick="login()">登录</a></div>
+</div>
+<div id="Regbox">
+    <div class="login_Item"><input type="text" id="TxtRegUserName"  placeholder="手机邮箱/用户名" /></div>
+    <div class="login_Item"><input type="password" id="TxtRegPwd" placeholder="请输入密码" /></div>
+    <div class="login_Item"><input  type="text" id="TxtRegqq" placeholder="QQ号"/></div>
+    <div class="login_Item"><input type="text" id="TxtRegEmail" placeholder="邮箱" /></div>
+    <div class="login_Item"><a href="javascript:;" onclick="Reglogin()">注册</a></div>
+</div>
+<p id="try"></p>
+</body>
+
+</html>
