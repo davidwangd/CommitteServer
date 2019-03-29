@@ -4,25 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/layui/css/layui.css">
-    <link href="fomation.css" rel="stylesheet" type="text/css" />
+    <link href="fomation.css" rel="stylesheet" type="text/css"/>
     <title>同济大学经济与管理学院学生会办事网站</title>
-
-    <!--<script type="text/javascript" src="/js/dddd.js"></script>-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/dddd.js"></script>
+    <script>
+        layui.use('layer',function(){
+            var layer=layui.layer;
+        });
+    </script>
 </head>
 
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/jquery-3.3.1.js"></script>
-<script src="/layui/layui.js"></script>
-<script>
-    layui.use('layer',function(){
-        var layer=layui.layer;
-    });
-    function ShowLoginBox()
-    {
-        document.getElementById("try").innerHTML='hello';
-        layer.msg("hello");
-    }
-</script>
 <body>
 <div id="header">
     <div id="header_con">

@@ -8,7 +8,7 @@ function ShowLoginBox()
         title: "用户登录",
         //设置div大小
         area: ["390px", "300px"],
-        content: '$("#loginBox")'
+        content: $("#loginBox")
     });
 }
 
