@@ -9,7 +9,7 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-3.3.1.js"></script>
     <script src="layui/layui.js"></script>
-    <script type="text/javascript" src="js/dddd.js"></script>
+    <script src="js/dddd.js"></script>
     <script>
         layui.use('layer',function(){
             var layer=layui.layer;
@@ -26,16 +26,19 @@
 </div>
 <div id="loginBox">
     <div class="login_Item">
-        <input type="text" id="TxtUserName"  placeholder="手机邮箱/用户名" />
+        <input type="text" id="TxtSID"  placeholder="学号" />
     </div>
     <div class="login_Item"><input type="password" id="TxtPwd" placeholder="请输入密码" /></div>
     <div class="login_Item"><a href="javascript:;" onclick="login()">登录</a></div>
 </div>
 <div id="Regbox">
-    <div class="login_Item"><input type="text" id="TxtRegUserName"  placeholder="手机邮箱/用户名" /></div>
-    <div class="login_Item"><input type="password" id="TxtRegPwd" placeholder="请输入密码" /></div>
-    <div class="login_Item"><input  type="text" id="TxtRegqq" placeholder="QQ号"/></div>
-    <div class="login_Item"><input type="text" id="TxtRegEmail" placeholder="邮箱" /></div>
+    <div class="login_Item"><input type="text" id="TxtRegSID"  placeholder="学号" /></div>
+    <div class="login_Item"><input type="text" id="TxtRegName"  placeholder="姓名" /></div>
+    <div class="login_Item"><input type="text" id="TxtRegNickname"  placeholder="昵称" /></div>
+    <div class="login_Item"><input type="text" id="TxtRegEmail"  placeholder="邮箱" /></div>
+    <div class="login_Item"><input type="text" id="TxtRegPhone"  placeholder="手机号" /></div>
+    <div class="login_Item"><input type="text" id="TxtRegJob"  placeholder="职位" /></div>
+    <div class="login_Item"><input type="password" id="TxtRegPwd" placeholder="密码" /></div>
     <div class="login_Item"><a href="javascript:;" onclick="Reglogin()">注册</a></div>
 </div>
 <p id="try"></p>

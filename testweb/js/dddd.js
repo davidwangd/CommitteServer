@@ -53,8 +53,8 @@ function ShowRegBox()
 {
     layer.open({
         type:1,
-        title:"注册",
-        area: ["390px", "350px;"],
+        title:"注ddd册",
+        area: ["700px", "600px;"],
         //div的内容
         content:$("#Regbox")
     });
