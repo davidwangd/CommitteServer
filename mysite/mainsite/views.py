@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render
 from django.template.loader import get_template
 from django.http import HttpResponse
@@ -26,3 +27,18 @@ def showpost(request, slug):
     except:
         return redirect('/')
 
+=======
+from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Post
+
+
+# Create your views here.
+
+def homepage(request):
+    posts = Post.objects.all()
+    post_lists = list()
+    for count, post in enumerate(posts):
+        post_lists.append("No.{}".format(str(count)) + str(post.title) + "<br>")
+    return HttpResponse(post_lists)
+>>>>>>> 2ceaa3d73868ec3ca50199036d7ade5400ff884a
