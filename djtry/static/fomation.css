@@ -1,0 +1,50 @@
+* {
+    margin:0px;
+    padding:0px;
+}
+#header {
+    height:40px;
+    width:100%;
+    background:#000000;
+}
+
+a {
+    text-decoration:none;
+}
+#header a {
+    float:right;
+    color:#ffffff;
+    line-height:40px;
+    margin-left:10px;
+}
+#header_con {
+    width:1200px;
+    margin:0px auto;
+}
+.login_Item {
+    margin-left:20px;
+}
+.login_Item input {
+    width:348px;
+    height:40px;
+    margin-top:10px;
+    border:solid 1px #04a6f9;
+}
+.login_Item a {
+    margin-top:20px;
+    width:350px;
+    height:40px;
+    display:block;
+    background:#04a6f9;
+    color:#ffffff;
+    line-height:40px;
+    text-align:center;
+}
+#loginBox {
+    display:none;/*//隐藏状态*/
+    margin:0px auto;
+}
+
+#Regbox {
+    display:none;
+}
