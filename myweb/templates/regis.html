@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>同济大学经济与管理学院学生会办事网站</title>
+</head>
+
+<body>
+	<div id="header"></div><br>
+	
+	<form name='loginfr' action='.' method='POST'>{% csrf_token %}
+		{{ regis_form.as_p }}
+		<br>
+		<input type='submit' value='登陆'>
+		<input type='reset' value='重置'>
+	</form>
+	<p>{{ message }}</p>
+
+
+	
+</body>
+
+</html>
