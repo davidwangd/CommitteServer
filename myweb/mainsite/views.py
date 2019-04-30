@@ -43,8 +43,38 @@ def login(request):
 
 
 def regis(request):
-	regis_form = forms.regisform()
-	message='请填写身份信息'
+	if request.method == 'POST':
+		regis_form = forms.regisform(request.POST)
+		if regis_form.is_valid():
+			regis_sid=request.POST['sid'].strip()
+			try:
+				student = models.Student.objects.get(sid=regis_sid)
+			except:
+				student = None
+			if student == None:
+				regis_sname = request.POST['sname']
+				regis_nickname=request.POST['nickname']
+				regis_email=request.POST['email']
+				regis_wechat=request.POST['wechat']
+				regis_phone=request.POST['phone']
+				regis_pwd=request.POST['pwd']
+				regis_pwd2=request.POST['pwd2']
+				if regis_pwd==regis_pwd2:
+					try:
+						student2= models.Student.objects.create(sid=regis_sid, sname=regis_sname, nickname=regis_nickname, email=regis_email, wechat=regis_wechat, phone=regis_phone, pwd=regis_pwd)
+						student2.save()
+						message='注册成功'
+					except:
+						message='系统繁忙，请稍后再试'
+				else:
+					message='密码不一致'
+			else:
+				message='用户已存在'
+		else:
+			message = '请检查输入的字段内容'
+	else:
+		regis_form = forms.regisform()
+		message='请注册'
 	template = get_template('regis.html')
 	request_context = RequestContext(request)
 	request_context.push(locals())
