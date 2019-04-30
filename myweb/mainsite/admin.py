@@ -11,3 +11,13 @@ class  StudentAdmin(admin.ModelAdmin):
 	list_display = ('sid','sname','nickname','ismanager')
 
 admin.site.register(models.Student, StudentAdmin)
+
+class  ProjectAdmin(admin.ModelAdmin):
+	list_display = ('pid','pname','department','stime','etime','place','checking','borrow','status')
+
+admin.site.register(models.Project, ProjectAdmin)
+
+class  AccountAdmin(admin.ModelAdmin):
+	list_display = ('aid','pid','sid','money','stime','etime','checking','status')
+
+admin.site.register(models.Account, AccountAdmin)
