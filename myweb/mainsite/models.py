@@ -76,7 +76,7 @@ class Department(models.Model):
 	dname = models.CharField(max_length=15)
 	
 	def __unicode__(self):
-		return self.did
+		return self.dname
 
 class Account(models.Model):
 	ysorno=(
