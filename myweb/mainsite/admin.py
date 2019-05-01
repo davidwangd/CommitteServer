@@ -21,3 +21,8 @@ class  AccountAdmin(admin.ModelAdmin):
 	list_display = ('aid','pid','sid','money','stime','etime','checking','status')
 
 admin.site.register(models.Account, AccountAdmin)
+
+class  DepartmentAdmin(admin.ModelAdmin):
+	list_display = ('did','dname')
+
+admin.site.register(models.Department, DepartmentAdmin)

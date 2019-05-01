@@ -6,15 +6,30 @@
 </head>
 
 <body>
-	<div id="header">yes</div>
+	<div id="header">用户注册登陆</div>
 	<form name='tolog' action='/login' method='GET'>
 		<input type='submit' value='登陆'>
 	</form>
 	<form name='toreg' action='/regis' method='GET'>
 		<input type='submit' value='注册'>
 	</form>
-
-	<p id="try">try</p>
+	<br><br><br>
+	<hr>
+		<p style='font-family:微软雅黑; font-size:20pt;font-weight:bold;'>正在进行</p>
+		{% for  project in projects %}
+			{% if project.status == 1 %}
+				<p style='font-family:微软雅黑; font-size:16pt;font-weight:bold;'>
+					{{ project.pname }} 
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					编号：{{ project.pid}} 开始时间：{{ project.stime }}   结束时间：{{ project.etime }} 地点：{{ project.place }} 负责部门：{{ project.department }}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					{{ project.introduce }}
+				</p>
+			{% endif %}
+		{% endfor %}
+	</hr>
 </body>
 
 </html>

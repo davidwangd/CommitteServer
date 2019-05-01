@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .models import Student
+from .models import Student, Project, Account, Department
 from django.template.loader import get_template
 from mainsite import models, forms
 from django.template import RequestContext
@@ -12,10 +12,28 @@ from django.template import RequestContext
 
 def index(request):
 	template = get_template('index.html')
-	students = Student.objects.all()
-	html = template.render(locals())
+	projects = Project.objects.all()
+	departments = Department.objects.all()
+	request_context = RequestContext(request)
+	request_context.push(locals())
+	html= template.template.render(request_context)
+	
 	return HttpResponse(html)
 
+
+def userhome(request):
+	template = get_template('userhome.html')
+	projects = Project.objects.all()
+	departments = Department.objects.all()
+	student = models.Student.objects.get(sid=request.session['this_sid'])
+	if student.ismanager==1:
+		message='您的身份是：管理员'
+	else:
+		message='您的身份是：普通用户'
+	request_context = RequestContext(request)
+	request_context.push(locals())
+	html= template.template.render(request_context)
+	return HttpResponse(html)
 
 def login(request):
 	if request.method == 'POST':
@@ -28,6 +46,7 @@ def login(request):
 				request.session['this_sid'] = login_sid
 				request.session['this_sname']=student.sname
 				message='欢迎您，'+ request.session['this_sname']
+				return HttpResponseRedirect('/userhome')
 			else:
 				message='密码错误或用户名不存在'
 		else:
@@ -76,6 +95,23 @@ def regis(request):
 		regis_form = forms.regisform()
 		message='请注册'
 	template = get_template('regis.html')
+	request_context = RequestContext(request)
+	request_context.push(locals())
+	html= template.template.render(request_context)
+	return HttpResponse(html)
+	
+	
+def operate(request, op):
+	proj_form = forms.projform(request.POST)
+	mes2=op
+	template = get_template('operate.html')
+	projects = Project.objects.all()
+	departments = Department.objects.all()
+	student = models.Student.objects.get(sid=request.session['this_sid'])
+	if student.ismanager==1:
+		message3='您的身份是：管理员'
+	else:
+		message3='您的身份是：普通用户'
 	request_context = RequestContext(request)
 	request_context.push(locals())
 	html= template.template.render(request_context)

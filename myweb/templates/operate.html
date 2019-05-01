@@ -6,18 +6,20 @@
 </head>
 
 <body>
-	<div id="header"></div><br>
-	
+	<div id="header">{{ mes2 }}</div><br>
+	<p>{{ message3 }}</p><br>
 	<form name='loginfr' action='.' method='POST'>{% csrf_token %}
-		{{ regis_form.as_p }}
+		{{ proj_form.as_p }}
 		<br>
-		<input type='submit' value='登陆'>
+		<input type='submit' value='提交'>
 		<input type='reset' value='重置'>
 	</form>
 	<p>{{ message }}</p><br>
-	<form name='ret' action='/' mothod='POST'>{% csrf_token %}
-		<input type='submit' value='返回首页'>
+	<form name='ret' action='/userhome' mothod='POST'>{% csrf_token %}
+		<input type='submit' value='返回用户界面'>
 	</form>
+	
+
 
 	
 </body>

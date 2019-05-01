@@ -71,7 +71,13 @@ class Project(models.Model):
 	def __unicode__(self):
 		return self.pid
 		
+class Department(models.Model):
+	did = models.CharField(max_length=2, unique=True, primary_key= True)
+	dname = models.CharField(max_length=15)
 	
+	def __unicode__(self):
+		return self.did
+
 class Account(models.Model):
 	ysorno=(
 		(0, '未审核'),

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>同济大学经济与管理学院学生会办事网站</title>
+</head>
+
+<body>
+	<div id="header">同济大学经济与管理学院学生会办事网站：用户界面</div><br>
+	<p>欢迎光临，{{ student.sname }}</p>
+	
+	<a href="/operate/proin">活动填写</a>
+	<a href="/operate/accin">报销填写</a>
+	
+	{% if student.ismanager == 1 %}
+	<a href="/operate/prore">活动审核</a>
+	<a href="/operate/accre">报销审核</a>
+	{% endif %}
+	
+	<p>{{ message }}</p><br>
+	<form name='ret' action='/' mothod='POST'>{% csrf_token %}
+		<input type='submit' value='返回首页'>
+	</form>
+	
+
+
+	
+</body>
+
+</html>
