@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>同济大学经济与管理学院学生会办事网站</title>
 </head>
-
+{% load dnaming %}
 <body>
 	<div id="header">同济大学经济与管理学院学生会办事网站：用户界面</div><br>
-	<p>欢迎光临，{{ student.sname }}</p>
+	<p>欢迎光临，{{ student.sname }} {{ student.sid }}</p>
 	
 	<a href="/operate/proin">活动填写</a>
 	<a href="/operate/accin">报销填写</a>
@@ -18,9 +18,28 @@
 	{% endif %}
 	
 	<p>{{ message }}</p><br>
-	<form name='ret' action='/' mothod='POST'>{% csrf_token %}
+	<form name='ret' action='/' method='POST'>{% csrf_token %}
 		<input type='submit' value='返回首页'>
 	</form>
+	<form name='ret2' action='/' method='GET'>{% csrf_token %}
+		<input type='submit' value='退出登录'>
+	</form>
+	<hr>
+		<p style='font-family:微软雅黑; font-size:20pt;font-weight:bold;'>我负责的活动</p>
+		{% for  project in projects %}
+			{% if project.status == 1 and project.sid == student%}
+				<p style='font-family:微软雅黑; font-size:16pt;font-weight:bold;'>
+					{{ project.pname }} 
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					编号：{{ project.pid}} 开始时间：{{ project.stime }}   结束时间：{{ project.etime }} 地点：{{ project.place }} 负责部门：{{project.department|dnaming}}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					{{ project.introduce }}
+				</p>
+			{% endif %}
+		{% endfor %}
+	</hr>
 	
 
 

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>同济大学经济与管理学院学生会办事网站</title>
+	<div style='font-family:微软雅黑; font-size:40pt;font-weight:bold;'>同济大学经济与管理学院学生会官网</div>
 </head>
-
+{% load dnaming %}
 <body>
 	<div id="header">用户注册登陆</div>
 	<form name='tolog' action='/login' method='GET'>
@@ -13,6 +14,11 @@
 	<form name='toreg' action='/regis' method='GET'>
 		<input type='submit' value='注册'>
 	</form>
+	{% if isloged == 1 %}
+		<form name='toreg' action='/userhome' method='GET'>
+			<input type='submit' value='返回用户界面'>
+		</form>
+	{% endif %}
 	<br><br><br>
 	<hr>
 		<p style='font-family:微软雅黑; font-size:20pt;font-weight:bold;'>正在进行</p>
@@ -22,7 +28,7 @@
 					{{ project.pname }} 
 				</p>
 				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
-					编号：{{ project.pid}} 开始时间：{{ project.stime }}   结束时间：{{ project.etime }} 地点：{{ project.place }} 负责部门：{{ project.department }}
+					编号：{{ project.pid}} 开始时间：{{ project.stime }}   结束时间：{{ project.etime }} 地点：{{ project.place }} 负责部门：{{project.department|dnaming}}
 				</p>
 				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
 					{{ project.introduce }}

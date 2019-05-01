@@ -8,8 +8,8 @@
 <body>
 	<div id="header">{{ mes2 }}</div><br>
 	<p>{{ message3 }}</p><br>
-	<form name='loginfr' action='.' method='POST'>{% csrf_token %}
-		{{ proj_form.as_p }}
+	<form name='loginfr' action='./proin' method='POST'>{% csrf_token %}
+		{{ oper_form.as_p }}
 		<br>
 		<input type='submit' value='提交'>
 		<input type='reset' value='重置'>

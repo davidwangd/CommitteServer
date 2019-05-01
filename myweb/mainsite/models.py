@@ -64,7 +64,7 @@ class Project(models.Model):
 	checking = models.IntegerField(default=0, choices=ysorno)
 	borrow = models.IntegerField(default=0, choices=ysorno)
 	status = models.IntegerField(default=0, choices=pos)
-	
+
 	class Meta:
 		ordering=('pid',)
 	

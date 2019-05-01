@@ -11,6 +11,12 @@ from django.template import RequestContext
 # Create your views here.
 
 def index(request):
+	isloged=0
+	if request.method=='GET':
+		request.session.flush()
+	else:
+		if request.method=='POST':
+			isloged=1
 	template = get_template('index.html')
 	projects = Project.objects.all()
 	departments = Department.objects.all()
@@ -45,6 +51,7 @@ def login(request):
 			if student.pwd == login_pwd:
 				request.session['this_sid'] = login_sid
 				request.session['this_sname']=student.sname
+				request.session.set_expiry(600) 
 				message='欢迎您，'+ request.session['this_sname']
 				return HttpResponseRedirect('/userhome')
 			else:
@@ -58,6 +65,7 @@ def login(request):
 	request_context = RequestContext(request)
 	request_context.push(locals())
 	html= template.template.render(request_context)
+	
 	return HttpResponse(html)
 
 
@@ -102,8 +110,49 @@ def regis(request):
 	
 	
 def operate(request, op):
-	proj_form = forms.projform(request.POST)
 	mes2=op
+	if request.method == 'POST':
+		if mes2 == 'proin':
+			oper_form = forms.projinform(request.POST)
+			if oper_form.is_valid():
+				op_pid=request.POST['pid'].strip()
+				try:
+					project = models.Project.objects.get(pid=op_pid)
+				except:
+					project = None
+				if project == None:
+					op_sname = request.POST['pname']
+					op_stime=request.POST['stime_year']+'-'+request.POST['stime_month']+'-'+request.POST['stime_day']
+					op_etime=request.POST['etime_year']+'-'+request.POST['etime_month']+'-'+request.POST['etime_day']
+					op_place=request.POST['place']
+					op_pernum=request.POST['pernum']
+					op_department=request.POST['department']
+					oo_sid=request.POST['sid']
+					op_sid = models.Student.objects.get(sid=oo_sid)
+					op_introduce=request.POST['introduce']
+					op_link=request.POST['link']
+					op_checking=0
+					op_borrow=0
+					op_status=0
+					try:
+						project2= models.Project.objects.create(pid=op_pid, pname=op_sname, stime=op_stime, etime=op_etime,place=op_place, pernum=op_pernum, department=op_department, sid=op_sid, introduce=op_introduce, link=op_link, checking=op_checking, borrow=op_borrow,status=op_status)
+						project2.save()
+						message='提交成功'
+					except:
+						message='系统繁忙，请稍后再试'
+				else:
+					message='项目编号已存在'
+			else:
+				message = '请检查输入的字段内容'
+		#else:
+			#if mes2 == 'prore':
+				#oper_form = forms.projreform(request.POST)	
+	else:
+		if mes2 == 'proin':
+			oper_form = forms.projinform(request.POST)
+		else:
+			if mes2 == 'prore':
+				oper_form = forms.projreform(request.POST)
 	template = get_template('operate.html')
 	projects = Project.objects.all()
 	departments = Department.objects.all()
