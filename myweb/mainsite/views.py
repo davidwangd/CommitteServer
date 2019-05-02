@@ -31,6 +31,7 @@ def userhome(request):
 	template = get_template('userhome.html')
 	projects = Project.objects.all()
 	departments = Department.objects.all()
+	accounts = Account.objects.all()
 	student = models.Student.objects.get(sid=request.session['this_sid'])
 	if student.ismanager==1:
 		message='您的身份是：管理员'
@@ -144,15 +145,38 @@ def operate(request, op):
 					message='项目编号已存在'
 			else:
 				message = '请检查输入的字段内容'
-		#else:
-			#if mes2 == 'prore':
-				#oper_form = forms.projreform(request.POST)	
+		elif mes2 == 'accin':
+			oper_form = forms.accinform(request.POST)
+			if oper_form.is_valid():
+				op_aid=request.POST['aid'].strip()
+				try:
+					account = models.Account.objects.get(aid=op_aid)
+				except:
+					account = None
+				if account == None:
+					oo_pid = request.POST['pid']
+					op_pid = models.Project.objects.get(pid=oo_pid)
+					oo_sid=request.POST['sid']
+					op_sid = models.Student.objects.get(sid=oo_sid)
+					op_reason=request.POST['reason']
+					op_money=request.POST['money']
+					op_checking=0
+					op_status=0
+					#try:
+					account2= models.Account.objects.create(aid=op_aid, pid=op_pid, sid=op_sid, reason=op_reason, money=op_money, checking=op_checking, status=op_status)
+					account2.save()
+					message='提交成功'
+					#except:
+						#message='系统繁忙，请稍后再试'
+				else:
+						message='报销编号已存在'
+			else:
+					message = '请检查输入的字段内容'
 	else:
 		if mes2 == 'proin':
 			oper_form = forms.projinform(request.POST)
-		else:
-			if mes2 == 'prore':
-				oper_form = forms.projreform(request.POST)
+		elif mes2 == 'accin':
+			oper_form = forms.accinform(request.POST)
 	template = get_template('operate.html')
 	projects = Project.objects.all()
 	departments = Department.objects.all()

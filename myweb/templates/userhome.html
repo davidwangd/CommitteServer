@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>同济大学经济与管理学院学生会办事网站</title>
 </head>
+{% load pnaming %}
 {% load dnaming %}
 <body>
-	<div id="header">同济大学经济与管理学院学生会办事网站：用户界面</div><br>
+	<div id="header" style='font-family:微软雅黑; font-size:24pt;font-weight:bold;'>同济大学经济与管理学院学生会办事网站：用户界面</div><br>
 	<p>欢迎光临，{{ student.sname }} {{ student.sid }}</p>
 	
 	<a href="/operate/proin">活动填写</a>
@@ -26,6 +27,7 @@
 	</form>
 	<hr>
 		<p style='font-family:微软雅黑; font-size:20pt;font-weight:bold;'>我负责的活动</p>
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>进行中</p>
 		{% for  project in projects %}
 			{% if project.status == 1 and project.sid == student%}
 				<p style='font-family:微软雅黑; font-size:16pt;font-weight:bold;'>
@@ -39,8 +41,80 @@
 				</p>
 			{% endif %}
 		{% endfor %}
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>审核通过即将开始</p>
+		{% for  project in projects %}
+			{% if project.status == 0 and project.checking == 1 and project.sid == student%}
+				<p style='font-family:微软雅黑; font-size:16pt;font-weight:bold;'>
+					{{ project.pname }} 
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					编号：{{ project.pid}} 开始时间：{{ project.stime }}   结束时间：{{ project.etime }} 地点：{{ project.place }} 负责部门：{{project.department|dnaming}}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					{{ project.introduce }}
+				</p>
+			{% endif %}
+		{% endfor %}
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>未审核</p>
+		{% for  project in projects %}
+			{% if project.checking == 0 and project.sid == student%}
+				<p style='font-family:微软雅黑; font-size:16pt;font-weight:bold;'>
+					{{ project.pname }} 
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					编号：{{ project.pid}} 开始时间：{{ project.stime }}   结束时间：{{ project.etime }} 地点：{{ project.place }} 负责部门：{{project.department|dnaming}}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					{{ project.introduce }}
+				</p>
+			{% endif %}
+		{% endfor %}
+	</hr><br><br>
+	<hr>
+		<p style='font-family:微软雅黑; font-size:20pt;font-weight:bold;'>我的报销</p>
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>审核通过</p>
+		{% for  account in accounts %}
+			{% if account.checking == 1 and account.sid == student%}
+				<p style='font-family:微软雅黑; font-size:14pt;font-weight:bold;'>
+					所属项目：{{ account.pid }} {{account.pid|pnaming}}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					编号：{{ account.aid}} 开始时间：{{ account.stime }}   结束时间：{{ account.etime }} 金额：{{ account.money }}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					{{ account.reason }}
+				</p>
+			{% endif %}
+		{% endfor %}
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>未审核</p>
+		{% for  account in accounts %}
+			{% if account.checking == 0 and account.sid == student%}
+				<p style='font-family:微软雅黑; font-size:14pt;font-weight:bold;'>
+					所属项目：{{ account.pid }} {{account.pid|pnaming}}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					编号：{{ account.aid}} 开始时间：{{ account.stime }}   结束时间：{{ account.etime }} 金额：{{ account.money }}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					{{ account.reason }}
+				</p>
+			{% endif %}
+		{% endfor %}
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>报销完成</p>
+		{% for  account in accounts %}
+			{% if account.status == 2 and account.sid == student%}
+				<p style='font-family:微软雅黑; font-size:14pt;font-weight:bold;'>
+					所属项目：{{ account.pid }} {{account.pid|pnaming}}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					编号：{{ account.aid}} 开始时间：{{ account.stime }}   结束时间：{{ account.etime }} 金额：{{ account.money }}
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					{{ account.reason }}
+				</p>
+			{% endif %}
+		{% endfor %}
 	</hr>
-	
 
 
 	

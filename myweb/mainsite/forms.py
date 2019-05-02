@@ -49,7 +49,7 @@ class projinform(forms.Form):
 	pernum = forms.IntegerField(label='预计参与人数')
 	department = forms.ChoiceField(label='负责部门', choices=bumen)
 	sid = forms.CharField(label='负责人学号', max_length=10)
-	introduce = forms.CharField(label='活动超链接', widget=forms.Textarea)
+	introduce = forms.CharField(label='活动介绍', widget=forms.Textarea)
 	link = forms.CharField(label='活动超链接', required=False, widget=forms.Textarea)
 
 
@@ -90,3 +90,11 @@ class projreform(forms.Form):
 	checking = forms.ChoiceField(label='审核情况', initial=0, choices=ysorno)
 	borrow = forms.ChoiceField(label='场地租用情况', initial=0, choices=ysorno)
 	status = forms.ChoiceField(label='活动状态', initial=0, choices=pos)
+
+
+class accinform(forms.Form):
+	aid = forms.CharField(label='报销序号', max_length=10)
+	pid = forms.CharField(label='项目号', max_length=10)
+	sid = forms.CharField(label='负责人学号', max_length=10)
+	reason = forms.CharField(label='报销事由', widget=forms.Textarea)
+	money = forms.FloatField(label='报销金额')

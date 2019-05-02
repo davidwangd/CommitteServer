@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <title>同济大学经济与管理学院学生会办事网站</title>
 </head>
-
+<script>
+//方法一
+	function submit1(){
+		document.getElementById("operfr").action = "./"+mes2;
+	}
+</script>
 <body>
 	<div id="header">{{ mes2 }}</div><br>
 	<p>{{ message3 }}</p><br>
-	<form name='loginfr' action='./proin' method='POST'>{% csrf_token %}
+	<form name='operfr'  method='POST'>{% csrf_token %}
 		{{ oper_form.as_p }}
 		<br>
 		<input type='submit' value='提交'>

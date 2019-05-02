@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'mainsite',
 	'mainsite.templatetags.dnaming',
+	'mainsite.templatetags.pnaming',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +68,7 @@ TEMPLATES = [
             ],
 			'libraries':{
 				'dnaming': 'mainsite.templatetags.dnaming',
+				'pnaming': 'mainsite.templatetags.pnaming',
 			}
         },
     },
