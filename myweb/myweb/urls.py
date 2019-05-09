@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from mainsite import views
+from django.views.static import serve
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,4 +26,5 @@ urlpatterns = [
 	url(r'^regis/',views.regis),
 	url(r'^userhome/',views.userhome),
 	url(r'^operate/(\w+)$', views.operate),
+	url(r'^static/(?P<path>.*)$',serve,{'document_root':settings.STATIC_ROOT}),
 ]
