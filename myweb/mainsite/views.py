@@ -87,9 +87,14 @@ def regis(request):
 				regis_phone=request.POST['phone']
 				regis_pwd=request.POST['pwd']
 				regis_pwd2=request.POST['pwd2']
+				regis_department=request.POST['department']
+				regis_job=request.POST['job']
+				regis_department2=request.POST['department2']
+				regis_isjobed = request.POST['isjobed']
+				regis_jobedtime = request.POST['jobedtime']
 				if regis_pwd==regis_pwd2:
 					try:
-						student2= models.Student.objects.create(sid=regis_sid, sname=regis_sname, nickname=regis_nickname, email=regis_email, wechat=regis_wechat, phone=regis_phone, pwd=regis_pwd)
+						student2= models.Student.objects.create(sid=regis_sid, sname=regis_sname, nickname=regis_nickname, email=regis_email, wechat=regis_wechat, phone=regis_phone, pwd=regis_pwd, department=regis_department, job=regis_job, department2=regis_department2, isjobed=regis_isjobed, jobedtime=regis_jobedtime)
 						student2.save()
 						message='注册成功'
 					except:
@@ -128,7 +133,7 @@ def operate(request, op):
 					op_place=request.POST['place']
 					op_pernum=request.POST['pernum']
 					op_department=request.POST['department']
-					oo_sid=request.POST['sid']
+					oo_sid=request.session['this_sid']
 					op_sid = models.Student.objects.get(sid=oo_sid)
 					op_introduce=request.POST['introduce']
 					op_link=request.POST['link']
@@ -156,7 +161,7 @@ def operate(request, op):
 				if account == None:
 					oo_pid = request.POST['pid']
 					op_pid = models.Project.objects.get(pid=oo_pid)
-					oo_sid=request.POST['sid']
+					oo_sid=request.session['this_sid']
 					op_sid = models.Student.objects.get(sid=oo_sid)
 					op_reason=request.POST['reason']
 					op_money=request.POST['money']

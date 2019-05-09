@@ -10,6 +10,29 @@ class Student(models.Model):
 		(0, '否'),
 		(1, '是'),
 	)
+	bumen = (
+		('01', '文艺部'), 
+		('02', '学术部'), 
+		('03', '体育部'), 
+		('04', '外联部'), 
+		('05', '国际部'), 
+		('06', '新媒体中心'), 
+		('07', '组织部'), 
+		('08', '班联部'), 
+		('09', '实践部'), 
+		('10', '信息事务部'), 
+		('11', '监察部'),
+		('12', '主席团'),
+		('13', '无'),
+	)
+	zhiwei = (
+		('0', '无'),
+		('1', '干事'),
+		('2', '副部长'),
+		('3', '部长'),
+		('4', '副主席'),
+		('5', '主席'),
+	)	
 	sid = models.CharField(max_length=10, unique=True, primary_key=True)
 	sname = models.CharField(max_length=20)
 	nickname = models.CharField(max_length=20, unique=True)
@@ -17,6 +40,11 @@ class Student(models.Model):
 	wechat = models.CharField(max_length=30)
 	phone = models.CharField(max_length=15)
 	pwd = models.CharField(max_length=20)
+	department = models.CharField(null=True, blank=True, max_length=2, choices=bumen)
+	job = models.CharField(null=True, blank=True, max_length=2, choices=zhiwei)
+	department2 = models.CharField(null=True, blank=True, max_length=2, choices=bumen)
+	isjobed = models.IntegerField(default=0, choices=ysorno, null=False, blank=True)
+	jobedtime = models.DateField(null=True, blank=True)
 	ismanager = models.IntegerField(default=0, choices=ysorno)
 	
 	class Meta:

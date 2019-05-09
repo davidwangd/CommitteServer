@@ -8,12 +8,12 @@ from .models import Student
 # Register your models here.
 
 class  StudentAdmin(admin.ModelAdmin):
-	list_display = ('sid','sname','nickname','ismanager')
+	list_display = ('sid','sname','nickname','department', 'job', 'isjobed', 'jobedtime','ismanager')
 
 admin.site.register(models.Student, StudentAdmin)
 
 class  ProjectAdmin(admin.ModelAdmin):
-	list_display = ('pid','pname','department','stime','etime','place','checking','borrow','status')
+	list_display = ('pid','pname','department', 'sid','stime','etime','place','checking','borrow','status')
 
 admin.site.register(models.Project, ProjectAdmin)
 
