@@ -136,5 +136,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = '/var/www/CommitteServer/staticfiles'
-#STATIC_ROOT = '/home/tianwen/Desktop/CommitteServer/staticfiles'
+#STATIC_ROOT = '/var/www/CommitteServer/staticfiles'
+STATIC_ROOT = '/home/tianwen/Desktop/CommitteServer/staticfiles'

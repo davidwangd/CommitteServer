@@ -9,10 +9,12 @@
 <body>
 	<div id="header" style='font-family:微软雅黑; font-size:24pt;font-weight:bold;'>同济大学经济与管理学院学生会办事网站：用户界面</div><br>
 	<p>欢迎光临，{{ student.sname }} {{ student.sid }}</p>
-	
+	{% if student.department != '13' %}
 	<a href="/operate/proin">活动填写</a>
 	<a href="/operate/accin">报销填写</a>
-	
+	<a href="/operate/retin">场地租用</a>
+	<br>
+	{% endif %}
 	{% if student.ismanager == 1 %}
 	<a href="/operate/prore">活动审核</a>
 	<a href="/operate/accre">报销审核</a>

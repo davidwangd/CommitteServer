@@ -134,3 +134,18 @@ class Account(models.Model):
 	def __unicode__(self):
 		return self.aid
 	
+class Roomrent(models.Model):
+	roomtype=(
+		(0, '教室'),
+		(1, '会议室'),
+		(2, '报告厅'),
+	)
+	rid = models.CharField(max_length=15, unique=True, primary_key=True)
+	pid = models.ForeignKey(Project, on_delete=models.CASCADE)
+	sid = models.ForeignKey(Student, on_delete=models.CASCADE)
+	day = models.DateField()
+	room = models.CharField(max_length=10)
+	type = models.IntegerField(default=0, choices=roomtype)
+	stime = models.CharField(max_length=8)
+	etime = models.CharField(max_length=8)
+	

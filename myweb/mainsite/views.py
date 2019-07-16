@@ -121,11 +121,7 @@ def operate(request, op):
 		if mes2 == 'proin':
 			oper_form = forms.projinform(request.POST)
 			if oper_form.is_valid():
-				op_pid=request.POST['pid'].strip()
-				try:
-					project = models.Project.objects.get(pid=op_pid)
-				except:
-					project = None
+				project = None
 				if project == None:
 					op_sname = request.POST['pname']
 					op_stime=request.POST['stime_year']+'-'+request.POST['stime_month']+'-'+request.POST['stime_day']
@@ -140,12 +136,23 @@ def operate(request, op):
 					op_checking=0
 					op_borrow=0
 					op_status=0
+					qbf="P"+op_department+request.POST['etime_year'][2:4]
+					if int(request.POST['etime_month'])<=7 and int(request.POST['etime_month'])>=2:
+						qbf = qbf + '02'
+					else:
+						qbf = qbf + '01'
+					try:
+						number = models.Project.objects.filter(pid__startswith = qbf).count() + 1
+					except:
+						number = 1
+					op_pid = qbf + "%02d"%(number)
+
 					try:
 						project2= models.Project.objects.create(pid=op_pid, pname=op_sname, stime=op_stime, etime=op_etime,place=op_place, pernum=op_pernum, department=op_department, sid=op_sid, introduce=op_introduce, link=op_link, checking=op_checking, borrow=op_borrow,status=op_status)
 						project2.save()
-						message='提交成功'
+						message='提交成功,项目号(pid)为' + op_pid
 					except:
-						message='系统繁忙，请稍后再试'
+						message='系统繁忙，请稍后再试, pid为'+ op_pid
 				else:
 					message='项目编号已存在'
 			else:
@@ -153,11 +160,7 @@ def operate(request, op):
 		elif mes2 == 'accin':
 			oper_form = forms.accinform(request.POST)
 			if oper_form.is_valid():
-				op_aid=request.POST['aid'].strip()
-				try:
-					account = models.Account.objects.get(aid=op_aid)
-				except:
-					account = None
+				account = None
 				if account == None:
 					oo_pid = request.POST['pid']
 					op_pid = models.Project.objects.get(pid=oo_pid)
@@ -167,21 +170,70 @@ def operate(request, op):
 					op_money=request.POST['money']
 					op_checking=0
 					op_status=0
-					#try:
-					account2= models.Account.objects.create(aid=op_aid, pid=op_pid, sid=op_sid, reason=op_reason, money=op_money, checking=op_checking, status=op_status)
-					account2.save()
-					message='提交成功'
-					#except:
-						#message='系统繁忙，请稍后再试'
+					project = models.Project.objects.get(pid = op_pid)
+					student = models.Student.objects.get(sid = op_sid)
+					qbf="A"+student.department+str(project.etime.year)[2:4]
+					if int(project.etime.month)<=7 and int(project.etime.month)>=2:
+						qbf = qbf + '02'
+					else:
+						qbf = qbf + '01'
+					try:
+						number = models.Account.objects.filter(aid__startswith = qbf).count() + 1
+					except:
+						number = 1
+					qbf = qbf + "%02d"%(number)
+					op_aid = qbf
+					try:
+						account2= models.Account.objects.create(aid=op_aid, pid=op_pid, sid=op_sid, reason=op_reason, money=op_money, checking=op_checking, status=op_status)
+						account2.save()
+						message='提交成功,报销编号(aid)为'+qbf
+					except:
+						message='系统繁忙，请稍后再试，报销编号(aid)为'+ qbf
 				else:
-						message='报销编号已存在'
+					message='报销编号已存在'
 			else:
-					message = '请检查输入的字段内容'
+				message = '请检查输入的字段内容'
+		elif mes2 == 'retin':
+			oper_form = forms.retinform(request.POST)
+			if oper_form.is_valid():
+				rentrec = None
+				if rentrec == None:
+					oo_pid = request.POST['pid']
+					op_pid = models.Project.objects.get(pid=oo_pid)
+					oo_sid=request.session['this_sid']
+					op_sid = models.Student.objects.get(sid=oo_sid)
+					op_day =request.POST['day_year']+'-'+request.POST['day_month']+'-'+request.POST['day_day']
+					op_room=request.POST['room']
+					op_type = request.POST['type']
+					op_stime = request.POST['stime']
+					op_etime = request.POST['etime']
+					
+					student = models.Student.objects.get(sid = op_sid)
+					qbf="R"+student.department+request.POST['day_year'][2:4]+"%02d"%(int(request.POST['day_month']))+"%02d"%(int(request.POST['day_day']))
+					try:
+						number = models.Roomrent.objects.filter(rid__startswith = qbf).count() + 1
+					except:
+						number = 1
+					qbf = qbf + "%02d"%(number)
+					op_rid = qbf
+					
+					try:
+						rentrec2= models.Roomrent.objects.create(rid=op_rid, pid=op_pid, sid=op_sid, day=op_day, room=op_room, type=op_type, stime=op_stime, etime=op_etime)
+						rentrec2.save()
+						message='提交成功,租借号(rid)为'+ op_rid
+					except:
+						message='系统繁忙，请稍后再试，租借号(rid)为'+ op_rid
+				else:
+					message='报销编号已存在'
+			else:
+				message = '请检查输入的字段内容'
 	else:
 		if mes2 == 'proin':
 			oper_form = forms.projinform(request.POST)
 		elif mes2 == 'accin':
 			oper_form = forms.accinform(request.POST)
+		elif mes2 == 'retin':
+			oper_form = forms.retinform(request.POST)
 	template = get_template('operate.html')
 	projects = Project.objects.all()
 	departments = Department.objects.all()

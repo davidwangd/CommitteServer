@@ -12,6 +12,11 @@
 </script>
 <body>
 	<div id="header">{{ mes2 }}</div><br>
+	{% if mes2 == 'retin' %}
+	<a href="http://semclass.tongji.edu.cn" target="_blank">场地查询请点此链接</a>
+	<p> 场地查询用户名：GUEST    密码：GUEST</p>
+	<br>
+	{% endif %}
 	<p>{{ message3 }}</p><br>
 	<form name='operfr'  method='POST'>{% csrf_token %}
 		{{ oper_form.as_p }}

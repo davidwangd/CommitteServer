@@ -74,7 +74,7 @@ class projinform(forms.Form):
 		[2,'成功'],
 		[3,'失败'],
 	]
-	pid = forms.CharField(label='项目号', max_length=10)
+	#pid = forms.CharField(label='项目号', max_length=10) P+部门+年份+学期+序号
 	pname = forms.CharField(label='项目名称', max_length=50)
 	stime = forms.DateField(label='开始时间', widget=extras.SelectDateWidget)
 	etime = forms.DateField(label='结束时间', widget=extras.SelectDateWidget)
@@ -112,8 +112,8 @@ class projreform(forms.Form):
 	]
 	pid = forms.CharField(label='项目号', max_length=10)
 	pname = forms.CharField(label='项目名称', max_length=50)
-	stime = forms.DateField(label='开始时间')
-	etime = forms.DateField(label='结束时间')
+	stime = forms.DateField(label='开始时间', widget=extras.SelectDateWidget)
+	etime = forms.DateField(label='结束时间', widget=extras.SelectDateWidget)
 	place = forms.CharField(label='举办地点', max_length=50)
 	pernum = forms.IntegerField(label='预计参与人数')
 	department = forms.ChoiceField(label='负责部门', choices=bumen)
@@ -125,8 +125,20 @@ class projreform(forms.Form):
 
 
 class accinform(forms.Form):
-	aid = forms.CharField(label='报销序号', max_length=10)
 	pid = forms.CharField(label='项目号', max_length=10)
-	sid = forms.CharField(label='负责人学号', max_length=10)
 	reason = forms.CharField(label='报销事由', widget=forms.Textarea)
 	money = forms.FloatField(label='报销金额')
+
+class retinform(forms.Form):
+	roomtype=[
+		[0, '教室'],
+		[1, '会议室'],
+		[2, '报告厅'],
+	]
+	#rid = forms.CharField(label='租用序号', max_length=10) R **(部门号) ** ** **(年月日) **(补充编号)
+	pid = forms.CharField(label='项目号', max_length=10)
+	day = forms.DateField(label='日期', widget=extras.SelectDateWidget)
+	room = forms.CharField(label='场地号码', max_length = 10)
+	type = forms.ChoiceField(label='场地类型', choices=roomtype, initial=0)
+	stime = forms.CharField(label='开始时间(hh-mm)', max_length = 8)
+	etime = forms.CharField(label='结束时间(hh-mm)', max_length = 8)

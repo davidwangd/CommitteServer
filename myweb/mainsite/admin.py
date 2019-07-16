@@ -26,3 +26,8 @@ class  DepartmentAdmin(admin.ModelAdmin):
 	list_display = ('did','dname')
 
 admin.site.register(models.Department, DepartmentAdmin)
+
+class  RoomrentAdmin(admin.ModelAdmin):
+	list_display = ('rid','pid','sid','day')
+
+admin.site.register(models.Roomrent, RoomrentAdmin)
