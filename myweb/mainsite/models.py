@@ -140,6 +140,11 @@ class Roomrent(models.Model):
 		(1, '会议室'),
 		(2, '报告厅'),
 	)
+	ysorno=(
+		(0, '未审核'),
+		(1, '是'),
+		(2, '否'),
+	)
 	rid = models.CharField(max_length=15, unique=True, primary_key=True)
 	pid = models.ForeignKey(Project, on_delete=models.CASCADE)
 	sid = models.ForeignKey(Student, on_delete=models.CASCADE)
@@ -148,4 +153,5 @@ class Roomrent(models.Model):
 	type = models.IntegerField(default=0, choices=roomtype)
 	stime = models.CharField(max_length=8)
 	etime = models.CharField(max_length=8)
+	status = models.IntegerField(default=0, choices=ysorno)
 	

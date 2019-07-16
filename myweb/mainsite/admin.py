@@ -28,6 +28,6 @@ class  DepartmentAdmin(admin.ModelAdmin):
 admin.site.register(models.Department, DepartmentAdmin)
 
 class  RoomrentAdmin(admin.ModelAdmin):
-	list_display = ('rid','pid','sid','day')
+	list_display = ('rid','pid','sid','day','status')
 
 admin.site.register(models.Roomrent, RoomrentAdmin)

@@ -218,7 +218,7 @@ def operate(request, op):
 					op_rid = qbf
 					
 					try:
-						rentrec2= models.Roomrent.objects.create(rid=op_rid, pid=op_pid, sid=op_sid, day=op_day, room=op_room, type=op_type, stime=op_stime, etime=op_etime)
+						rentrec2= models.Roomrent.objects.create(rid=op_rid, pid=op_pid, sid=op_sid, day=op_day, room=op_room, type=op_type, stime=op_stime, etime=op_etime, status=0)
 						rentrec2.save()
 						message='提交成功,租借号(rid)为'+ op_rid
 					except:
