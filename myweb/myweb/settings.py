@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 	'mainsite',
 	'mainsite.templatetags.dnaming',
 	'mainsite.templatetags.pnaming',
+	'mainsite.templatetags.roomtpnaming',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,8 @@ TEMPLATES = [
 			'libraries':{
 				'dnaming': 'mainsite.templatetags.dnaming',
 				'pnaming': 'mainsite.templatetags.pnaming',
+				'roomtpnaming':
+				'mainsite.templatetags.roomtpnaming',
 			}
         },
     },

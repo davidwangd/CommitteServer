@@ -140,5 +140,5 @@ class retinform(forms.Form):
 	day = forms.DateField(label='日期', widget=extras.SelectDateWidget)
 	room = forms.CharField(label='场地号码', max_length = 10)
 	type = forms.ChoiceField(label='场地类型', choices=roomtype, initial=0)
-	stime = forms.CharField(label='开始时间(hh-mm)', max_length = 8)
-	etime = forms.CharField(label='结束时间(hh-mm)', max_length = 8)
+	stime = forms.CharField(label='开始时间(hh:mm)', max_length = 8)
+	etime = forms.CharField(label='结束时间(hh:mm)', max_length = 8)

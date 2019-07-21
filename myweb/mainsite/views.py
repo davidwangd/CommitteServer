@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .models import Student, Project, Account, Department
+from .models import Student, Project, Account, Department, Roomrent
 from django.template.loader import get_template
 from mainsite import models, forms
 from django.template import RequestContext
@@ -31,6 +31,7 @@ def userhome(request):
 	template = get_template('userhome.html')
 	projects = Project.objects.all()
 	departments = Department.objects.all()
+	roomrents = Roomrent.objects.all()
 	accounts = Account.objects.all()
 	student = models.Student.objects.get(sid=request.session['this_sid'])
 	if student.ismanager==1:

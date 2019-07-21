@@ -6,6 +6,7 @@
 </head>
 {% load pnaming %}
 {% load dnaming %}
+{% load roomtpnaming %}
 <body>
 	<div id="header" style='font-family:微软雅黑; font-size:24pt;font-weight:bold;'>同济大学经济与管理学院学生会办事网站：用户界面</div><br>
 	<p>欢迎光临，{{ student.sname }} {{ student.sid }}</p>
@@ -72,6 +73,52 @@
 			{% endif %}
 		{% endfor %}
 	</hr><br><br>
+	
+	<hr>
+		<p style='font-family:微软雅黑; font-size:20pt;font-weight:bold;'>我的场地租借</p>
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>审核通过</p>
+		{% for  rent in roomrents %}
+			{% if rent.status == 1 and rent.sid == student %}
+				<p style='font-family:微软雅黑; font-size:14pt;font-weight:bold;'>
+					编号：{{ rent.rid}} 场地号： {{ rent.room }} 场地类型：{{ rent.type|roomtpnaming }}
+					
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					租借时间：{{ rent.day }}   起止时间：{{ rent.stime }} ~ {{ rent.etime }}<br>
+					所属项目：{{ rent.pid }} {{rent.pid|pnaming}}  
+				</p>
+			{% endif %}
+		{% endfor %}
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>未审核</p>
+		{% for  rent in roomrents %}
+			{% if rent.status == 0 and rent.sid == student%}
+				<p style='font-family:微软雅黑; font-size:14pt;font-weight:bold;'>
+					编号：{{ rent.rid}} 场地号： {{ rent.room }} 场地类型：{{ rent.type|roomtpnaming }}
+					
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					租借时间：{{ rent.day }}   起止时间：{{ rent.stime }} ~ {{ rent.etime }}<br>
+					所属项目：{{ rent.pid }} {{rent.pid|pnaming}}  
+				</p>
+			{% endif %}
+		{% endfor %}
+		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>租借失败</p>
+		{% for  rent in roomrents %}
+			{% if rent.status == 2 and rent.sid == student%}
+				<p style='font-family:微软雅黑; font-size:14pt;font-weight:bold;'>
+					编号：{{ rent.rid}} 场地号： {{ rent.room }} 场地类型：{{ rent.type|roomtpnaming }}
+					
+				</p>
+				<p style='font-family:微软雅黑; font-size:12pt;font-weight:bold;'>
+					租借时间：{{ rent.day }}   起止时间：{{ rent.stime }} ~ {{ rent.etime }}<br>
+					所属项目：{{ rent.pid }} {{rent.pid|pnaming}}  
+				</p>
+			{% endif %}
+		{% endfor %}
+	</hr>
+	
+	
+	
 	<hr>
 		<p style='font-family:微软雅黑; font-size:20pt;font-weight:bold;'>我的报销</p>
 		<p style='font-family:微软雅黑; font-size:18pt;font-weight:bold;'>审核通过</p>

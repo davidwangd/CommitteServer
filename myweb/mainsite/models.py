@@ -155,3 +155,9 @@ class Roomrent(models.Model):
 	etime = models.CharField(max_length=8)
 	status = models.IntegerField(default=0, choices=ysorno)
 	
+	class Meta:
+		ordering=('day','rid',)
+	
+	def __unicode__(self):
+		return self.rid
+	
