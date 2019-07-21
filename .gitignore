@@ -41,3 +41,7 @@ build.sh
 
 # Files referenced by Django FileField
 *.dat
+
+# Migrations
+*migrations/*
+*Migrations/*
